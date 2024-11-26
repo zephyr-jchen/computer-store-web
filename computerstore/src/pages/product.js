@@ -136,10 +136,16 @@ const ProductMgt = () => {
                 <td>{product.description}</td>
                 <td>{product.quantity}</td>
                 <td>
-                  <button onClick={() => handleEditProduct(product.id)}>
+                  <button
+                    className="bg-slate-900 text-white px-7 py-3 rounded-xl"
+                    onClick={() => handleEditProduct(product.id)}
+                  >
                     Edit
                   </button>
-                  <button onClick={() => handleDeleteProduct(product.id)}>
+                  <button
+                    className="bg-slate-900 text-white px-7 py-3 rounded-xl"
+                    onClick={() => handleDeleteProduct(product.id)}
+                  >
                     Delete
                   </button>
                 </td>
