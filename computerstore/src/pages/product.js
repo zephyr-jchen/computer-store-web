@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { products as initialProducts } from "../productitems";
+import Header from "../components/header";
 
-const ProductMgt = () => {
-  const { slug } = useParams();
-  const [products, setProduct] = useState(initialProducts);
+const ProductMgt = ({ products, setProducts }) => {
+  const [previewImage, setPreviewImage] = useState(null);
   const [newProduct, setNewProduct] = useState({
     id: "",
     name: "",
@@ -14,10 +13,23 @@ const ProductMgt = () => {
     image: "",
     quantity: 0,
   });
+  const { slug } = useParams();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewProduct({ ...newProduct, [name]: value });
+  };
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+        setNewProduct({ ...newProduct, image: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleAddProduct = () => {
@@ -29,7 +41,7 @@ const ProductMgt = () => {
       ...products,
       { ...newProduct, id: Date.now(), slug: slug },
     ];
-    setProduct(updatedProducts);
+    setProducts(updatedProducts);
     setNewProduct({
       id: "",
       name: "",
@@ -39,23 +51,25 @@ const ProductMgt = () => {
       image: "",
       quantity: 0,
     });
+    setPreviewImage(null);
   };
 
   const handleDeleteProduct = (id) => {
-    setProduct(products.filter((item) => item.id !== id));
+    const updatedProducts = products.filter((item) => item.id !== id);
+    setProducts(updatedProducts);
   };
 
   const handleEditProduct = (id) => {
     const productToEdit = products.find((item) => item.id === id);
     setNewProduct(productToEdit);
+    setPreviewImage(productToEdit.image);
   };
 
   const handleUpdateProduct = () => {
-    setProduct(
-      products.map((item) =>
-        item.id === newProduct.id ? { ...newProduct } : item
-      )
+    const productToUpdate = products.map((item) =>
+      item.id === newProduct.id ? { ...newProduct } : item
     );
+    setProducts(productToUpdate);
     setNewProduct({
       id: "",
       name: "",
@@ -65,15 +79,17 @@ const ProductMgt = () => {
       image: "",
       quantity: 0,
     });
+    setPreviewImage(null);
   };
 
   return (
     <div className="product-management">
-      <h2 className="text-xl font-bold">Product Management</h2>
+      <Header />
+      {/* <h2 className="text-xl font-bold">Product Management</h2> */}
 
       {/* Add/Edit Product Form */}
       <div className="add-product-form">
-        <h3>{newProduct.id ? "Edit Product" : "Add Product"}</h3>
+        <h2>{newProduct.id ? "Edit Product" : "Add Product"}</h2>
         <input
           type="text"
           name="name"
@@ -94,13 +110,8 @@ const ProductMgt = () => {
           value={newProduct.description}
           onChange={handleInputChange}
         />
-        <input
-          type="text"
-          name="image"
-          placeholder="Image URL"
-          value={newProduct.image}
-          onChange={handleInputChange}
-        />
+        <input type="file" accept="image/*" onChange={handleImage} />
+        {previewImage && <img src={previewImage} alt="Preview" width="100" />}
         <input
           type="number"
           name="quantity"
@@ -109,6 +120,7 @@ const ProductMgt = () => {
           onChange={handleInputChange}
         />
         <button
+          className="bg-slate-900 text-white px-3 py-3 rounded-xl"
           onClick={newProduct.id ? handleUpdateProduct : handleAddProduct}
         >
           {newProduct.id ? "Update Product" : "Add Product"}
@@ -117,7 +129,7 @@ const ProductMgt = () => {
 
       {/* Product List */}
       <div className="product-list">
-        <h3>Existing Products</h3>
+        <h2>Existing Products</h2>
         <table>
           <thead>
             <tr>
@@ -137,13 +149,13 @@ const ProductMgt = () => {
                 <td>{product.quantity}</td>
                 <td>
                   <button
-                    className="bg-slate-900 text-white px-7 py-3 rounded-xl"
+                    className="bg-slate-900 text-white px-3 py-3 rounded-xl"
                     onClick={() => handleEditProduct(product.id)}
                   >
                     Edit
                   </button>
                   <button
-                    className="bg-slate-900 text-white px-7 py-3 rounded-xl"
+                    className="bg-slate-900 text-white px-3 py-3 rounded-xl"
                     onClick={() => handleDeleteProduct(product.id)}
                   >
                     Delete

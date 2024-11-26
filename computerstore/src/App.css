@@ -61,6 +61,10 @@ main {
 .product-management {
   padding: 20px;
 }
+.product-management h2 {
+  font-size: large;
+  font-weight: 600;
+}
 .add-product-form input,
 .add-product-form textarea {
   display: block;
