@@ -38,6 +38,7 @@
 }
 
 .container-layout {
+.container-layout {
   background-color: whitesmoke;
   min-height: 100vh;
 }
@@ -56,4 +57,30 @@ main {
   align-items: center;
   position: relative;
   border-radius: 1px solid;
+}
+
+.product-management {
+  padding: 20px;
+}
+.product-management h2 {
+  font-size: large;
+  font-weight: 600;
+}
+.add-product-form input,
+.add-product-form textarea {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+}
+.product-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.product-list th,
+.product-list td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
 }

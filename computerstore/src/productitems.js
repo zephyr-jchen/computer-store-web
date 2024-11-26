@@ -1,44 +1,47 @@
 export const products = [
-    {
-        id: 100001,
-        name: 'MacBook Air',
-        price: 1499,
-        description: 'description for macbook air',
-        slug:'macbook-air',
-        image: '/assets/images/macbookair.jpg'
-    },
-    {
-        id: 100002,
-        name: 'MacBook Pro',
-        price: 1699,
-        description: 'description for macbook pro',
-        slug:'macbook-pro',
-        image: '/assets/images/macbookpro.jpg'
-    },
-    {
-        id: 100003,
-        name: 'iMac',
-        price: 2199,
-        description: 'description for iMac',
-        slug:'imac',
-        image: '/assets/images/imac.jpg'
-    },
-    {
-        id: 100004,
-        name: 'ThinkPad',
-        price: 1566,
-        description: 'description for thinkpad',
-        slug:'thinkpad',
-        image: '/assets/images/thinkpad.jpg'
-    },
-    {
-        id: 100005,
-        name: 'Air Pods',
-        price: 200,
-        description: 'description for air pods',
-        slug:'air-pods',
-        image: '/assets/images/airpods.jpg'
-    }
-]
-
-
+  {
+    id: 100001,
+    name: "MacBook Air",
+    price: 1499,
+    description: "description for macbook air",
+    slug: "macbook-air",
+    image: "/assets/images/macbookair.jpg",
+    quantity: 10,
+  },
+  {
+    id: 100002,
+    name: "MacBook Pro",
+    price: 1699,
+    description: "description for macbook pro",
+    slug: "macbook-pro",
+    image: "/assets/images/macbookpro.jpg",
+    quantity: 10,
+  },
+  {
+    id: 100003,
+    name: "iMac",
+    price: 2199,
+    description: "description for iMac",
+    slug: "imac",
+    image: "/assets/images/imac.jpg",
+    quantity: 10,
+  },
+  {
+    id: 100004,
+    name: "ThinkPad",
+    price: 1566,
+    description: "description for thinkpad",
+    slug: "thinkpad",
+    image: "/assets/images/thinkpad.jpg",
+    quantity: 10,
+  },
+  {
+    id: 100005,
+    name: "Air Pods",
+    price: 200,
+    description: "description for air pods",
+    slug: "air-pods",
+    image: "/assets/images/airpods.jpg",
+    quantity: 10,
+  },
+];
