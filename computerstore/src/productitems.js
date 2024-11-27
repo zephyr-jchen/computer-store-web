@@ -7,6 +7,7 @@ export const products = [
     slug: "macbook-air",
     image: "/assets/images/macbookair.jpg",
     quantity: 10,
+    category: "laptop",
   },
   {
     id: 100002,
@@ -16,6 +17,7 @@ export const products = [
     slug: "macbook-pro",
     image: "/assets/images/macbookpro.jpg",
     quantity: 10,
+    category: "laptop",
   },
   {
     id: 100003,
@@ -25,6 +27,7 @@ export const products = [
     slug: "imac",
     image: "/assets/images/imac.jpg",
     quantity: 10,
+    category: "desktop",
   },
   {
     id: 100004,
@@ -34,6 +37,7 @@ export const products = [
     slug: "thinkpad",
     image: "/assets/images/thinkpad.jpg",
     quantity: 10,
+    category: "laptop",
   },
   {
     id: 100005,
@@ -43,5 +47,6 @@ export const products = [
     slug: "air-pods",
     image: "/assets/images/airpods.jpg",
     quantity: 10,
+    category: "accessories",
   },
 ];

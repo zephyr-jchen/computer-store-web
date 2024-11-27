@@ -12,6 +12,7 @@ const ProductMgt = ({ products, setProducts }) => {
     slug: "",
     image: "",
     quantity: 0,
+    category: "",
   });
   const { slug } = useParams();
 
@@ -50,6 +51,7 @@ const ProductMgt = ({ products, setProducts }) => {
       slug: "",
       image: "",
       quantity: 0,
+      category: "",
     });
     setPreviewImage(null);
   };
@@ -78,6 +80,7 @@ const ProductMgt = ({ products, setProducts }) => {
       slug: "",
       image: "",
       quantity: 0,
+      category: "",
     });
     setPreviewImage(null);
   };
@@ -117,6 +120,13 @@ const ProductMgt = ({ products, setProducts }) => {
           name="quantity"
           placeholder="Quantity"
           value={newProduct.quantity}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="category"
+          placeholder="Category"
+          value={newProduct.category}
           onChange={handleInputChange}
         />
         <button
