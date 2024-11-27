@@ -8,7 +8,7 @@ const Checkout = () => {
 
   if (!carts || carts.length === 0) {
     return (
-      <div>
+      <div className="checkout-container">
         <h2>No items in the cart!</h2>
         <button onClick={() => navigate("/")}>Back to Home</button>
       </div>
@@ -16,22 +16,33 @@ const Checkout = () => {
   }
 
   return (
-    <div>
-      <h2>Order Review</h2>
-      <ul>
-        {carts.map((item, index) => {
-          <li key={index}>
-            {item.productId} - Quantity: {item.quantity}
-          </li>;
-        })}
-      </ul>
-      <div>
-        <p>Subtotal: ${subtotal.toFixed(2)} CAD </p>
-        <p>HST: ${hst.toFixed(2)} CAD</p>
-        <p>Shipping Fee: ${shippingFee.toFixed(2)} CAD</p>
-        <p>Total: ${total.toFixed(2)} CAD</p>
+    <div className="checkout-container">
+      <h2 className="checkout-header">Order Review</h2>
+      <div className="order-summary">
+        <h3>Order Details</h3>
+        <ul>
+          {carts.map((item, index) => {
+            <li key={index}>
+              {item.productId} - Quantity: {item.quantity}
+            </li>;
+          })}
+        </ul>
+        <div className="total-summary">
+          <p>Subtotal: ${subtotal.toFixed(2)} CAD </p>
+          <p>HST: ${hst.toFixed(2)} CAD</p>
+          <p>Shipping Fee: ${shippingFee.toFixed(2)} CAD</p>
+          <h3>Total: ${total.toFixed(2)} CAD</h3>
+        </div>
       </div>
-      <button onClick={() => alert("Order Placed.")}>Confirm</button>
+
+      <div className="checkout-actions">
+        <button className="cancel-btn" onClick={() => navigate("/")}>
+          Cancel
+        </button>
+        <button className="confirm-btn" onClick={() => alert("Order Placed.")}>
+          Confirm
+        </button>
+      </div>
     </div>
   );
 };

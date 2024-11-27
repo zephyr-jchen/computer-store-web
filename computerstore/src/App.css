@@ -83,3 +83,80 @@ main {
   padding: 10px;
   text-align: left;
 }
+.checkout-container {
+  background-color: whitesmoke;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.order-summary {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.order-summary h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.order-summary ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.order-summary ul li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.total-summary {
+  font-size: 1.2rem;
+  text-align: right;
+  margin-top: 20px;
+}
+
+.checkout-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-actions button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.checkout-actions .confirm-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.checkout-actions .confirm-btn:hover {
+  background-color: #45a049;
+}
+
+.checkout-actions .cancel-btn {
+  background-color: rgb(160, 160, 160);
+  color: white;
+}
+
+.checkout-actions .cancel-btn:hover {
+  background-color: gray;
+}
