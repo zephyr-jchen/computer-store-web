@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleStatusTab } from "../stores/shoppingcart";
+import "../css/header.css"
 
 const Header = () => {
   const [totalQuantity, setTotalQuantity] = useState(0);
@@ -16,23 +17,19 @@ const Header = () => {
     dispatch(toggleStatusTab());
   };
   return (
-    <header className="flex justify-between items-center mb-5">
+    <header className="header-style">
       <div>
-        <Link to="/" className="text-xl font-semibold ml-10 mt-8">
+        <Link to="/" className="link-style-home">
           Home
         </Link>
-        <Link to="/product" className="text-xl font-semibold ml-20 mt-8">
+        <Link to="/product" className="link-style-product">
           Product
         </Link>
       </div>
-      <div
-        className="w-12 h-12 bg-white-100 rounded-full flex justify-center items-center relative"
-        onClick={handleOpenTabCart}
-      >
+      <div className="cart" onClick={handleOpenTabCart}>
         🛒
         <span
-          className="absolute top-2/3 right-1/2 bg-red-500 text-white text-sm
-                w-4 h-4 rounded-full flex justify-center items-center"
+          className="qty-style"
         >
           {totalQuantity}
         </span>

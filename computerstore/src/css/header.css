@@ -1,0 +1,52 @@
+.header-style{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25 rem;
+    background-color: black;
+    height: 60px;
+}
+
+.link-style-home {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+}
+
+.link-style-product {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: white;
+    margin-left: 80px;
+}
+
+.cart {
+    width: 3rem;
+    height: 3rem;
+    background-color: black; 
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.qty-style{
+    position: absolute;
+    top: 60%; /* 2/3 of the parent */
+    right: 50%; /* 1/2 of the parent */
+    background-color: #ef4444; /* Red */
+    color: #ffffff; /* White text */
+    font-size: 0.8rem; /* Text size */
+    width: 1rem; /* Badge width */
+    height: 1rem; /* Badge height */
+    border-radius: 50%; /* Circular shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
