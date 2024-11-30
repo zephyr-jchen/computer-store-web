@@ -87,7 +87,7 @@ const ProductMgt = ({ products, setProducts }) => {
 
   return (
     <div className="product-management">
-      <Header />
+      {/* <Header /> */}
       {/* <h2 className="text-xl font-bold">Product Management</h2> */}
 
       {/* Add/Edit Product Form */}

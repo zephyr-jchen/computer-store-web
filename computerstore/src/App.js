@@ -17,11 +17,12 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home products={products} />} />
           <Route path="/:slug" element={<ProductDetails />} />
-        </Route>
-        <Route
+          <Route
           path="/product"
           element={<ProductMgt products={products} setProducts={setProducts} />}
         />
+        </Route>
+        
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </BrowserRouter>

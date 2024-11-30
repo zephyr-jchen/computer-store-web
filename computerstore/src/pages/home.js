@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ProductCart from "../components/productCart";
 import { products as initialProducts } from "../productitems";
+import "../css/home.css"
 
 const Home = () => {
   // const [products, setProducts] = useState(initialProducts);
@@ -27,20 +28,19 @@ const Home = () => {
 
   return (
     <div>
-      <h1 className="text-3xl my-5 ml-10">List Products</h1>
+      <h1>List Products</h1>
 
-      <div className="flex gap-4 p-4">
+      <div className="filter-style">
         <input
           type="text"
           placeholder="Search products..."
           value={searchTerm}
           onChange={handleSearch}
-          className="p-2 border rounded-md flex-1"
         />
         <select
           value={selectedCategory}
           onChange={handleCategoryChange}
-          className="p-2 border rounded-md"
+          
         >
           <option value="">All Categories</option>
           <option value="desktop">Desktops</option>
@@ -50,7 +50,7 @@ const Home = () => {
         </select>
       </div>
 
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
+      <div className="product-item-container">
         {filteredProducts.map((product, key) => (
           <ProductCart key={key} data={product} />
         ))}
