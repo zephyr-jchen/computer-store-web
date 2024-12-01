@@ -4,63 +4,74 @@ import { products } from '../productitems';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../stores/shoppingcart';
 import '../css/detail.css'
+import { useSelector } from 'react-redux';
 
-const ProductDetails = () =>{
-    const {slug} = useParams();
+const ProductDetails = () => {
+    const { slug } = useParams();
     const [detail, setDetail] = useState([]);
     const [quantity, setQuantity] = useState(1);
     const [isAdded, setIsAdded] = useState(false);
+
+    const carts = useSelector(store => store.cart.items);
     const dispatch = useDispatch();
     useEffect(
-        ()=>{
+        () => {
             const findDetail = products.filter(product => product.slug === slug);
-            if (findDetail.length > 0){
+            if (findDetail.length > 0) {
                 setDetail(findDetail[0]);
-            }else{
-                window.location.href='/';
+            } else {
+                window.location.href = '/';
             }
-        },[slug])
-    
+        }, [slug])
+
+    useEffect(() => {
+        const isAdded = carts.some(cart => cart.productId === detail.id);
+        setIsAdded(isAdded);
+    }, [carts, detail.id])
+
     //     const handleMinusQuantity=() =>{
     //     setQuantity(quantity - 1 < 1? 1: quantity-1);
     // }   
-    
+
     // const handlePlusQuantity=() =>{
     //     setQuantity(quantity + 1);
     // }
-    
+
     const handleMinusQuantity = () => {
         const newQuantity = quantity - 1 < 1 ? 1 : quantity - 1;
         setQuantity(newQuantity);
         if (newQuantity !== quantity && isAdded) {
             dispatch(addToCart({
                 productId: detail.id,
-                quantity: newQuantity - quantity  
+                price: detail.price,
+                quantity: newQuantity - quantity
             }));
         }
     }
-    
+
     const handlePlusQuantity = () => {
         const newQuantity = quantity + 1;
         setQuantity(newQuantity);
         if (isAdded) {
             dispatch(addToCart({
                 productId: detail.id,
-                quantity: 1 
+                price: detail.price,
+                quantity: 1
             }));
         }
     }
 
-    const handleAddToCart=() =>{
+    const handleAddToCart = () => {
         dispatch(addToCart(
             {
                 productId: detail.id,
+                price: detail.price,
                 quantity: quantity
             }
         ));
         setIsAdded(true);
     }
-    return(
+    return (
         <div>
             <h2 className='text-3xl text-center mt-5'>Product Details</h2>
             <div className='grid grid-cols-2 gap-5 mt-5'>
@@ -82,16 +93,16 @@ const ProductDetails = () =>{
                             Add To Cart
                         </button> */}
                         {!isAdded ? (
-                    <button className='btn-Add' onClick={handleAddToCart}>
-                        Add To Cart
-                    </button>
-                ) : (
-                    <div className='product-qty-container'>
-                        <button onClick={handleMinusQuantity}>-</button>
-                        <span className='mx-2'>{quantity}</span>
-                        <button onClick={handlePlusQuantity}>+</button>
-                    </div>
-                )}
+                            <button className='btn-Add' onClick={handleAddToCart}>
+                                Add To Cart
+                            </button>
+                        ) : (
+                            <div className='product-qty-container'>
+                                <button onClick={handleMinusQuantity}>-</button>
+                                <span className='mx-2'>{quantity}</span>
+                                <button onClick={handlePlusQuantity}>+</button>
+                            </div>
+                        )}
                     </div>
                     <p className='description-style'>{detail.description}</p>
                 </div>

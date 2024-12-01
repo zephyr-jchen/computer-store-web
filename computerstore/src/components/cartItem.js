@@ -2,15 +2,21 @@ import React, {useState, useEffect} from 'react'
 import {products} from '../productitems';
 import { useDispatch } from 'react-redux';
 import { changeQuantity } from '../stores/shoppingcart';
+import { useSelector } from 'react-redux';
 
 const CartItem = (props) =>{
-    const {productId, quantity} = props.data;
+    const {productId} = props.data;
+    
+    const carts = useSelector(store => store.cart.items);
+    console.log('CartItem',carts);
     const [detail, setDetail] = useState([]);
     const dispatch = useDispatch();
     useEffect(()=> {
         const findDetail = products.filter(product => product.id === productId)[0];
         setDetail(findDetail);
     }, [productId])
+
+    const {quantity=0} = carts.filter(cart => cart.productId === productId)?.[0];
     console.log(detail);
     const handleMinusQuantity = () => {
         dispatch(

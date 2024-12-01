@@ -1,9 +1,15 @@
 import React from "react";
+import { useStore } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const { state } = useLocation();
-  const { carts, subtotal, hst, shippingFee, total } = state || {};
+
+  // const {  subtotal, hst, shippingFee, total } = state || {};
+  const cartsSotre = useSelector(store => store.cart);
+  const {items:carts,subtotal, hst, shippingFee, total} = cartsSotre
+  console.log("carts", carts,cartsSotre);
   const navigate = useNavigate();
 
   if (!carts || carts.length === 0) {

@@ -16,7 +16,8 @@ const ProductCart = (props) =>{
         dispatch(
             addToCart({
                 productId: id,
-                quantity: 1
+                quantity: 1,
+                price: price
             })
         );
         setIsAdded(true);
@@ -26,7 +27,8 @@ const ProductCart = (props) =>{
         dispatch(
             addToCart({ 
                 productId: id, 
-                quantity: 1 
+                quantity: 1 ,
+                price: price
             }));
     }
 
@@ -37,14 +39,16 @@ const ProductCart = (props) =>{
             dispatch(
                 addToCart({ 
                     productId: id, 
-                    quantity: -1 
+                    quantity: -1 ,
+                    price: price
                 })
             );
         } else if (currentQty === 1) {
             dispatch(
                 addToCart({ 
                     productId: id, 
-                    quantity: -1 
+                    quantity: -1 ,
+                    price: price
                 })
             );
             setIsAdded(false);
