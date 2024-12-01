@@ -39,7 +39,7 @@ const Checkout = () => {
         <button className="cancel-btn" onClick={() => navigate("/")}>
           Cancel
         </button>
-        <button className="confirm-btn" onClick={() => alert("Order Placed.")}>
+        <button className="confirm-btn" onClick={() => navigate("/payment")}>
           Confirm
         </button>
       </div>

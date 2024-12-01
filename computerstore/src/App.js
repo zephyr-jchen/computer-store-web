@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import ProductDetails from "./pages/detail";
 import ProductMgt from "./pages/product";
 import Checkout from "./pages/checkout";
+import Payment from "./pages/payment";
 import { products as initialProducts } from "./productitems";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -24,6 +25,7 @@ function App() {
         </Route>
         
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </BrowserRouter>
   );
