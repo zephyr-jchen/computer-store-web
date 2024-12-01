@@ -11,8 +11,9 @@ const ProductDetails = () => {
     const [detail, setDetail] = useState([]);
     const [quantity, setQuantity] = useState(1);
     const [isAdded, setIsAdded] = useState(false);
-
+    const cartsSotre = useSelector(store => store.cart);
     const carts = useSelector(store => store.cart.items);
+    
     const dispatch = useDispatch();
     useEffect(
         () => {
@@ -25,8 +26,12 @@ const ProductDetails = () => {
         }, [slug])
 
     useEffect(() => {
-        const isAdded = carts.some(cart => cart.productId === detail.id);
-        setIsAdded(isAdded);
+        const cartItem = carts.filter(cart => cart.productId === detail.id);
+        console.log('cartItem', cartItem)
+        if(cartItem.length>0){
+            setQuantity(cartItem[0].quantity);
+        }
+        setIsAdded(!!cartItem.length);
     }, [carts, detail.id])
 
     //     const handleMinusQuantity=() =>{

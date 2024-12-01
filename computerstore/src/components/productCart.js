@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../stores/shoppingcart';
@@ -11,6 +11,11 @@ const ProductCart = (props) =>{
     const [isAdded, setIsAdded] = useState(false);
     const {id, name, price,image,slug} = props.data;
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        const currentQty = carts.find(item => item.productId === id)?.quantity || 0;
+        setIsAdded(currentQty > 0);
+    }, [carts, id]);
     
     const handleAddToCart = () => {
         dispatch(

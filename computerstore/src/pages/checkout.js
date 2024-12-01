@@ -8,8 +8,8 @@ const Checkout = () => {
 
   // const {  subtotal, hst, shippingFee, total } = state || {};
   const cartsSotre = useSelector(store => store.cart);
-  const {items:carts,subtotal, hst, shippingFee, total} = cartsSotre
-  console.log("carts", carts,cartsSotre);
+  const { items: carts, subtotal, hst, shippingFee, total } = cartsSotre
+  console.log("carts", carts, cartsSotre);
   const navigate = useNavigate();
 
   if (!carts || carts.length === 0) {
