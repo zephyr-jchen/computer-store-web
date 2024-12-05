@@ -38,3 +38,19 @@
     margin-left: 20px;
     color: grey;
 }
+
+.reviews-section {
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.review-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.review-item strong {
+  font-weight: bold;
+}

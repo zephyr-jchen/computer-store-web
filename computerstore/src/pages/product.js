@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Header from "../components/header";
 
-const ProductMgt = ({ products, setProducts }) => {
+const ProductMgt = () => {
+  const [products, setProducts] = useState([]);
   const [previewImage, setPreviewImage] = useState(null);
   const [newProduct, setNewProduct] = useState({
-    id: "",
+    id: 0,
     name: "",
     price: "",
     description: "",
@@ -14,7 +15,22 @@ const ProductMgt = ({ products, setProducts }) => {
     quantity: 0,
     category: "",
   });
-  const { slug } = useParams();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  // Function to fetch products with token
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("/api/products", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      setProducts(response.data);
+    } catch (err) {
+      console.error("Failed to fetch products:", err);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,32 +49,33 @@ const ProductMgt = ({ products, setProducts }) => {
     }
   };
 
-  const handleAddProduct = () => {
+  // Function to add a new product with token
+  const handleAddProduct = async () => {
     if (!newProduct.name || !newProduct.price) {
       alert("Name and price are required!");
       return;
     }
-    const updatedProducts = [
-      ...products,
-      { ...newProduct, id: Date.now(), slug: slug },
-    ];
-    setProducts(updatedProducts);
-    setNewProduct({
-      id: "",
-      name: "",
-      price: "",
-      description: "",
-      slug: "",
-      image: "",
-      quantity: 0,
-      category: "",
-    });
-    setPreviewImage(null);
+    try {
+      const response = await axios.post("/api/products", newProduct, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      setProducts([...products, response.data]);
+      resetForm();
+    } catch (err) {
+      console.error("Failed to add product:", err);
+    }
   };
 
-  const handleDeleteProduct = (id) => {
-    const updatedProducts = products.filter((item) => item.id !== id);
-    setProducts(updatedProducts);
+  // Function to delete a product with token
+  const handleDeleteProduct = async (id) => {
+    try {
+      await axios.delete(`/api/products/${id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      setProducts(products.filter((item) => item.id !== id));
+    } catch (err) {
+      console.error("Failed to delete product:", err);
+    }
   };
 
   const handleEditProduct = (id) => {
@@ -67,13 +84,24 @@ const ProductMgt = ({ products, setProducts }) => {
     setPreviewImage(productToEdit.image);
   };
 
-  const handleUpdateProduct = () => {
-    const productToUpdate = products.map((item) =>
-      item.id === newProduct.id ? { ...newProduct } : item
-    );
-    setProducts(productToUpdate);
+  // Function to update a product with token
+  const handleUpdateProduct = async () => {
+    try {
+      const response = await axios.put(`/api/products/${newProduct.id}`, newProduct, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      setProducts(
+        products.map((item) => (item.id === newProduct.id ? response.data : item))
+      );
+      resetForm();
+    } catch (err) {
+      console.error("Failed to update product:", err);
+    }
+  };
+
+  const resetForm = () => {
     setNewProduct({
-      id: "",
+      id: 0,
       name: "",
       price: "",
       description: "",
@@ -87,10 +115,6 @@ const ProductMgt = ({ products, setProducts }) => {
 
   return (
     <div className="product-management">
-      {/* <Header /> */}
-      {/* <h2 className="text-xl font-bold">Product Management</h2> */}
-
-      {/* Add/Edit Product Form */}
       <div className="add-product-form">
         <h2>{newProduct.id ? "Edit Product" : "Add Product"}</h2>
         <input
@@ -137,7 +161,6 @@ const ProductMgt = ({ products, setProducts }) => {
         </button>
       </div>
 
-      {/* Product List */}
       <div className="product-list">
         <h2>Existing Products</h2>
         <table>

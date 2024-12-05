@@ -1,8 +1,8 @@
-.header-style{
+.header-style {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.25 rem;
+    margin-bottom: 1.25rem; /* Fixed spacing typo (rem instead of rem;) */
     background-color: black;
     height: 60px;
 }
@@ -25,6 +25,14 @@
     margin-left: 80px;
 }
 
+/* Parent container for cart and logout to align horizontally */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Add spacing between cart and logout icons */
+}
+
+/* Cart Icon */
 .cart {
     width: 3rem;
     height: 3rem;
@@ -35,11 +43,15 @@
     align-items: center;
     position: relative;
 }
+.cart:hover {
+    color: #2e59d9;
+}
 
-.qty-style{
+/* Badge on the cart */
+.qty-style {
     position: absolute;
-    top: 60%; /* 2/3 of the parent */
-    right: 50%; /* 1/2 of the parent */
+    top: 10%; /* Adjusted to position the badge properly */
+    right: 10%; /* Adjusted for better alignment */
     background-color: #ef4444; /* Red */
     color: #ffffff; /* White text */
     font-size: 0.8rem; /* Text size */
@@ -49,4 +61,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Logout Icon */
+.logout {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.logout-icon {
+    font-size: 22px;
+    color: #4e73df;
+    transition: color 0.3s ease;
+}
+
+.logout-icon:hover {
+    color: #2e59d9;
 }

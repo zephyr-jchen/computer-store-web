@@ -1,4 +1,12 @@
-export const products = [
+const mongoose = require('mongoose');
+const Product = require('./models/Product');
+
+mongoose.connect('mongodb://localhost:27017/store', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const seedProducts =  [
   {
     id: 100001,
     name: "MacBook Air",
@@ -50,3 +58,13 @@ export const products = [
     category: "accessories",
   },
 ];
+
+
+const seedDB = async () => {
+  await Product.deleteMany({});
+  await Product.insertMany(seedProducts);
+  console.log("Database seeded!");
+  mongoose.connection.close();
+};
+
+seedDB();
