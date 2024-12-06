@@ -6,6 +6,7 @@ import "../css/productCart.css";
 
 const ProductCart = (props) => {
   const carts = useSelector((store) => store.cart.items);
+  console.log("Redux Store carts:", carts);
   const { id, name, price, image, slug } = props.data;
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(0);
@@ -23,19 +24,19 @@ const ProductCart = (props) => {
   const handleAddToCart = () => {
     const updatedQuantity = quantity + 1;
     setQuantity(updatedQuantity);
-    dispatch(updateCart({ productId: id, quantity: updatedQuantity, price }));
+    dispatch(updateCart({ productId: id, quantity: updatedQuantity, price, name: name }));
   };
 
   const handleQtyIncrease = () => {
     const updatedQuantity = quantity + 1;
     setQuantity(updatedQuantity);
-    dispatch(updateCart({ productId: id, quantity: updatedQuantity, price }));
+    dispatch(updateCart({ productId: id, quantity: updatedQuantity, price, name: name }));
   };
 
   const handleQtyDecrease = () => {
     const updatedQuantity = quantity - 1;
     setQuantity(updatedQuantity > 0 ? updatedQuantity : 0);
-    dispatch(updateCart({ productId: id, quantity: updatedQuantity, price }));
+    dispatch(updateCart({ productId: id, quantity: updatedQuantity, price, name: name }));
   };
 
   return (

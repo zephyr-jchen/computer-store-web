@@ -11,8 +11,8 @@ const initialState = {
 };
 
 const calculateTotals = (items, shippingFee) => {
-  if (!items.length) return { subtotal: 0, hst: 0, total: 0 };
-  const subtotal = items.reduce((acc, item) => acc + item.quantity * item.price, 0);
+  if (!items || items.length === 0) return { subtotal: 0, hst: 0, total: 0, shippingFee: 0};
+  const subtotal = items.reduce((acc, item) => acc + (item.quantity || 0) * (item.price || 0), 0);
   const hst = subtotal * 0.13;
   const total = subtotal + hst + shippingFee;
   return { subtotal, hst, total };
@@ -23,6 +23,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     setCart(state, action) {
+      console.log("Payload data:", action.payload);
       state.items = action.payload;
       const { subtotal, hst, total } = calculateTotals(state.items, state.shippingFee);
       state.subtotal = subtotal;
@@ -30,13 +31,13 @@ const cartSlice = createSlice({
       state.total = total;
     },
     addToCart(state, action) {
-        const { productId, quantity, price } = action.payload;
-
+        const { productId, quantity, price, name } = action.payload;
+      console.log(action.payload);
         const existingItem = state.items.find(item => item.productId === productId);
         if (existingItem) {
             existingItem.quantity += quantity;
         } else {
-            state.items.push({ productId, quantity, price });
+            state.items.push({ productId, quantity, price, name });
         }
 
         const { subtotal, hst, total } = calculateTotals(state.items, state.shippingFee);
@@ -69,6 +70,7 @@ export const fetchCart = () => async (dispatch) => {
     const response = await axios.get("/api/cart", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
+    console.log("API /api/cart response data:", response.data);
     dispatch(setCart(response.data));
   } catch (error) {
     console.error("Failed to fetch cart:", error);
@@ -77,11 +79,11 @@ export const fetchCart = () => async (dispatch) => {
 
 export const updateCart = (item) => async (dispatch) => {
   try {
-    const { productId, quantity } = item;
+    const { productId, quantity, name } = item;
     if (quantity > 0) {
       await axios.post(
         "/api/cart",
-        { productId, quantity },
+        { productId, quantity, name },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
     } else {

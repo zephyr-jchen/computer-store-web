@@ -15,7 +15,7 @@ router.get('/', authenticateUser, async (req, res) => {
 // add to cart
 router.post('/', authenticateUser, async (req, res) => {
   const userId = req.user.id;
-  const { productId, quantity } = req.body;
+  const { productId, quantity, name } = req.body;
 
   let cart = await Cart.findOne({ userId });
   if (!cart) cart = new Cart({ userId, items: [] });
@@ -24,7 +24,7 @@ router.post('/', authenticateUser, async (req, res) => {
   if (itemIndex > -1) {
     cart.items[itemIndex].quantity = quantity;
   } else {
-    cart.items.push({ productId, quantity });
+    cart.items.push({ productId, quantity, name });
   }
 
   await cart.save();

@@ -1,50 +1,36 @@
-# React + TypeScript + Vite
+# **Computer Store Project README**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## **Overview**
+This project is a full-stack application for managing a computer store. It includes user authentication, product management, cart functionality, and order management. It uses MongoDB for the database, Node.js with Express for the backend, and React for the frontend.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## **Prerequisites**
+1. **Docker Installed**: Ensure Docker is installed and running.
+2. **Node.js Installed**: Verify that Node.js (version 16 or above) and npm are installed.
+3. **MongoDB Docker Image**: MongoDB should already be set up as a Docker container.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## **Setup Instructions**
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### **1. Start MongoDB in Docker**
+- Ensure a MongoDB Docker container is running. 
+- Use the following command if the container is not running:
+  ```bash
+  docker run -d --name mongodb-container -p 27017:27017 mongo
+### 2.Import Seed Data
+  node seed.js
+### 3. Install Dependencies
+Frontend
+  cd computerstore
+  npm install
+Backend
+  cd ..
+  npm install
+### 4. Build the Frontend
+  cd computerstore
+  npm run buld
+### 5. start server
+  cd ..
+  node server.js

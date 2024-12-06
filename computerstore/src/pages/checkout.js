@@ -5,11 +5,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const { state } = useLocation();
-
-  // const {  subtotal, hst, shippingFee, total } = state || {};
-  const cartsSotre = useSelector(store => store.cart);
-  const { items: carts, subtotal, hst, shippingFee, total } = cartsSotre
-  console.log("carts", carts, cartsSotre);
+  
+  //const {  subtotal, hst, shippingFee, total } = state || {};
+  const cartsStore = useSelector(store => store.cart);
+  const carts = state?.carts || cartsStore;
+  const subtotal = state?.subtotal || 0;
+  const hst = state?.hst || 0;
+  const shippingFee = state?.shippingFee || 6.99;
+  const total = state?.total || 0;
+  //const { items: carts, subtotal = 0, hst = 0, shippingFee = 6.99, total = 0} = cartsSotre
+  console.log("Redux Store cart data:", cartsStore);
+  console.log("carts:", carts)
   const navigate = useNavigate();
 
   if (!carts || carts.length === 0) {
@@ -27,14 +33,14 @@ const Checkout = () => {
       <div className="order-summary">
         <h3>Order Details</h3>
         <ul>
-          {carts.map((item, index) => {
+          {carts.map((item, index) => (
             <li key={index}>
-              {item.productId} - Quantity: {item.quantity}
-            </li>;
-          })}
+              {item.name} - Quantity: {item.quantity}
+            </li>
+          ))}
         </ul>
         <div className="total-summary">
-          <p>Subtotal: ${subtotal.toFixed(2)} CAD </p>
+          <p>Subtotal: ${Number(subtotal).toFixed(2)} CAD </p>
           <p>HST: ${hst.toFixed(2)} CAD</p>
           <p>Shipping Fee: ${shippingFee.toFixed(2)} CAD</p>
           <h3>Total: ${total.toFixed(2)} CAD</h3>
